@@ -1,0 +1,42 @@
+<!-- HTML 페이지를 API 요청으로 가져올 때 스크립트가 텍스트로 변환되는 이유는 브라우저의 기본 동작 및 보안 정책 때문입니다. 
+브라우저는 일반적으로 외부 HTML 페이지를 가져오는 경우 해당 페이지의 스크립트를 자동으로 실행하지 않으며, 스크립트를 텍스트로만 가져옵니다. 
+이것은 크로스 사이트 스크립팅(Cross-Site Scripting, XSS) 공격과 같은 보안 문제를 방지하기 위한 것입니다.
+만약 HTML 페이지를 가져와서 해당 페이지에 포함된 스크립트를 실행하려면, 해당 스크립트를 직접 실행해야 합니다. JavaScript에서는 eval() 함수나 Function 생성자를 사용하여 동적으로 스크립트를 실행할 수 있습니다. 
+그러나 이러한 방법은 보안 문제를 유발할 수 있으므로 주의가 필요합니다. -->
+
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-5" aria-label="Menu navigation">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/index.html">TurtleShell</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/products.html">상품</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/article_create.html">글작성</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-nav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link disabled text-primary-emphasis">환영합니다</a>
+                </li>
+                <li class="nav-item" id="mypage" style="display: none;">
+                    <a class="nav-link active" href="/profile.html">마이페이지</a>
+                </li>
+                <li class="nav-item">
+                    <li class="nav-item" id="logout" style="display: none;">
+                        <a class="nav-link active" onclick="handleLogout()">로그아웃</a>
+                    </li>
+                </li>
+                <li class="nav-item" id="login">
+                    <a class="nav-link active" href="/login.html">로그인</a>
+                </li>
+                <li class="nav-item" id="signup">
+                    <a class="nav-link active" href="/signup.html">회원가입</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
