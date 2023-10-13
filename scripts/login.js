@@ -20,11 +20,9 @@ button.addEventListener("click", async (event) => {
         const data = await response.json();
         const refreshToken = data.refresh;
         const accessToken = data.access;
-        const expirationPeriod = JSON.parse(
-            atob(accessToken.split(".")[1])
-        ).exp;
+        const expirationDate = JSON.parse(atob(accessToken.split(".")[1])).exp;
         localStorage.setItem("access", accessToken);
-        localStorage.setItem("exp", expirationPeriod);
+        localStorage.setItem("exp", expirationDate);
         localStorage.setItem("refresh", refreshToken);
 
         window.location.href = "/index.html";
