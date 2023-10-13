@@ -1,5 +1,6 @@
 async function loadArticles() {
     const articles = await getArticles();
+
     const articleList = document.getElementById("article-list");
 
     articles.forEach((article) => {
@@ -44,6 +45,7 @@ async function loadArticles() {
         const newCardbody = document.createElement("div");
         newCardbody.setAttribute("class", "card-body");
         newCard.appendChild(newCardbody);
+        const newCardText = document.createElement("div");
 
         articleList.appendChild(newCol);
     });

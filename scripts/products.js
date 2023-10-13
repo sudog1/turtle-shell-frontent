@@ -10,7 +10,7 @@ async function loadProducts() {
         products.forEach((product) => {
             const productCard = `
                 <div class="col">
-                    <a href="https://www.musinsa.com/app/goods/${product.id}" target="_blank" style="text-decoration: none;">
+                    <a href="product_detail.html?product_id=${product.id}" style="text-decoration: none;">
                         <div class="card text-center">
                             <div class="card-header">
                                 <div>${product.brand}</div>

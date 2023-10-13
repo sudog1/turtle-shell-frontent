@@ -1,5 +1,18 @@
 let articleId;
 
+async function likesComment(articleId, commentId) {
+    const likesBtn = document.getElementById(`comment${commentId}`);
+    const likesCnt = likesBtn.querySelector("span");
+    const response = await postLikesComment(articleId, commentId);
+    if (response.ok) {
+        const data = await response.json();
+        likesCnt.innerText = data.likes_count;
+    } else {
+        const error = await response.json();
+        alert(error.detail);
+    }
+}
+
 // 작성된 댓글 불러오기
 async function loadComment(articleId) {
     const response = await getComments(articleId);
@@ -14,7 +27,9 @@ async function loadComment(articleId) {
         <div class="media-body">
             <h5 class="mt-0 mb-1">${comment.author.nickname}</h5>
             ${comment.content}
-            좋아요 ${comment.likes_count}
+            <div id="comment${comment.id}" class="btn btn-sm btn-outline-primary" onclick="likesComment(${articleId}, ${comment.id})">
+                좋아요<span class="badge rounded-pill bg-danger">${comment.likes_count}</span>
+            </div>
         </div>
         </li>`;
     });
@@ -41,6 +56,7 @@ async function submitComment() {
 window.onload = async function () {
     const urlParms = new URLSearchParams(window.location.search);
     articleId = urlParms.get("article_id");
+
     await loadArticles();
     await loadComment(articleId);
 };
@@ -90,16 +106,18 @@ async function loadArticles() {
     data.products.forEach((product) => {
         const productCard = `
         <div class="col">
-            <div class="card text-center">
-                <div class="card-header">
-                    <div>${product.brand}</div>
-                    <div>${product.SKU}</div>
+            <a href="product_detail.html?product_id=${product.id}" style="text-decoration: none;">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <div>${product.brand}</div>
+                        <div>${product.SKU}</div>
+                    </div>
+                    <img src="${product.image}" class="card-img-top" alt="${product.name}">
+                    <div class="card-body">
+                        <p class="card-text">${product.name}</p>
+                    </div>
                 </div>
-                <img src="${product.image}" class="card-img-top" alt="${product.name}">
-                <div class="card-body">
-                    <p class="card-text">${product.name}</p>
-                </div>
-            </div>
+            </a>
         </div>`;
         productList.insertAdjacentHTML("beforeend", productCard);
     });

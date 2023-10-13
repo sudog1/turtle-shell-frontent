@@ -11,11 +11,36 @@
     <script src="scripts/loader.js"></script>
     <div class="container w-75">
         <div class="card">
-            <div class="card-header text-center">
-                작성하기
+            <div class="card-header bg-danger-subtle" style="overflow: hidden;">
+                <img id="brand-logo" src="">
             </div>
             <div class="card-body">
-                
+                <div class="row">
+                    <div class="col">
+                        <img id="product-image" src="">
+                    </div>
+                    <div class="col">
+                        <div class="mt-4 row d-flex justify-content-center">
+                            <div class="row">
+                                <p class="my-3"><strong>브랜드:</strong> <span id="brand-name"></span></p>
+                            </div>
+                            <div class="row">
+                                <p class="my-3"><strong>품번:</strong> <span id="SKU"></span></p>
+                            </div>
+                            <div class="row">
+                                <p class="my-3"><strong>제품명:</strong> <span id="product-name"></span></p>
+                            </div>
+                            <div class="row">
+                                <p class="my-3"><strong>가격:</strong> <span id="price"></span></p>
+                            </div>
+                            <div class="row w-75 mt-5">
+                                <a id="product-link" type="_blank" href="">
+                                    <button class="w-100 btn btn-outline-success btn-lg">구매하러 가기</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
