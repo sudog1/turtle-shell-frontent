@@ -35,13 +35,14 @@
                             style="float:right;" 
                             id="article-delete" onclick="handleDeleteArticle()">삭제
                         </button>
-                        <button 
+                        <!-- <button 
                             type="button" 
                             class="btn btn-outline-success" 
                             style="float:right;" 
                             id="article-update"
                             onclick="articleupdate()">수정
-                        </button>
+                        </button> -->
+                        <a href="/article_update.html" id="article-update" class="btn btn-outline-success" style="float:right">수정</a>
                     </div>
                 </c:if> 
                 <div class="container text-center mb-3">
@@ -67,9 +68,14 @@
                         댓글 <span id="comments-count"></span>
                     </p>
                 </div>
-                <div class="container mt-5">
-                    <ul class="list-unstyled" id="comment-list"></ul>
+                <div class="row">
+                    <div class="container mt-5">
+                        <ul class="list-unstyled" id="comment-list">
+                        </ul>
+                    </div>
+                    
                 </div>
+
                 <hr>
                 <form>
                     <div class="row">

@@ -3,6 +3,7 @@ header = document.querySelector("header");
 function changeNavbar() {
     const isLogIn = localStorage.getItem("access") !== null;
     const mypage = document.getElementById("mypage");
+    const feed = document.getElementById("feed");
     const logout = document.getElementById("logout");
     const article_create = document.getElementById("article_create");
     const login = document.getElementById("login");
@@ -12,17 +13,18 @@ function changeNavbar() {
         mypage.style.display = "block";
         logout.style.display = "block";
         article_create.style.display = "block";
+        feed.style.display = "block";
         login.style.display = "none";
         signup.style.display = "none";
     } else {
         mypage.style.display = "none";
         logout.style.display = "none";
         article_create.style.display = "none";
+        feed.style.display = "none";
         login.style.display = "block";
         signup.style.display = "block";
     }
 }
-
 
 async function injectNavbar() {
     let navbar = await fetch("/navbar.html").then((response) => {

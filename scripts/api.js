@@ -98,6 +98,20 @@ async function handleLogout() {
     window.location.href = "/index.html";
 }
 
+async function postFollow(userId) {
+    const accessToken = localStorage.getItem("access");
+    const response = await fetch(
+        `${backend_base_url}/accounts/follow/${userId}/`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+    return response;
+}
+
 async function getStyleList() {
     const accessToken = localStorage.getItem("access");
     const response = await fetch(`${backend_base_url}/articles/styles/`, {
@@ -167,9 +181,37 @@ async function getArticles() {
     }
 }
 
+// 피드 글 불러오기
+async function getFeedArticles() {
+    const accessToken = localStorage.getItem("access");
+    const response = await fetch(`${backend_base_url}/articles/feed/`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+        },
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        alert("불러오는 것에 실패하였습니다.");
+    }
+}
+
+// 작성글 불러오기
+async function getUserArticles(userId) {
+    const response = await fetch(`${backend_base_url}/articles/author/${userId}/`);
+
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    } else {
+        alert("불러오는 것에 실패하였습니다.");
+    }
+}
+
 // 상세페이지로 이동하는 함수
-function articleDetail(article_id) {
-    window.location.href = `${frontend_base_url}/article_detail.html?article_id=${article_id}`;
+function articleDetail(articleId) {
+    window.location.href = `${frontend_base_url}/article_detail.html?article_id=${articleId}`;
 }
 
 // 글 상세페이지 불러오기
@@ -246,6 +288,20 @@ async function postComment(articleId, newComment) {
     }
 }
 
+async function postLikesComment(articleId, commentId) {
+    const accessToken = localStorage.getItem("access");
+    const response = await fetch(
+        `${backend_base_url}/articles/${articleId}/comments/${commentId}/likes/`,
+        {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+        }
+    );
+    return response;
+}
+
 // 유저 정보 가져오기
 async function getUserInfo(userId) {
     const accessToken = localStorage.getItem("access");
@@ -272,5 +328,11 @@ async function getUserInfo(userId) {
 // 상품 리스트 가져오기
 async function getProductList() {
     const response = await fetch(`${backend_base_url}/products/`);
+    return response;
+}
+
+// 상품 상세정보
+async function getProductDetail(productId) {
+    const response = await fetch(`${backend_base_url}/products/${productId}`);
     return response;
 }

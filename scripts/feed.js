@@ -1,53 +1,5 @@
-let userId;
-
-window.onload = async () => {
-    const urlParms = new URLSearchParams(window.location.search);
-    userId = urlParms.get("user_id");
-    await loadUserInfo();
-    await loadAuthorArticles();
-};
-
-async function handleFollow() {
-    if (userId) {
-        const response = await postFollow(userId);
-        if (response.ok) {
-            const data = await response.json();
-            const followers = document.getElementById("followers");
-            followers.textContent = data.followers_count;
-        }
-    } else {
-        alert("다른 사람만 팔로우 가능합니다.");
-    }
-}
-
-async function loadUserInfo() {
-    const response = await getUserInfo(userId);
-    const data = await response.json();
-    if (!response.ok) {
-        return;
-    }
-    userId = data.id;
-    const email = document.getElementById("email");
-    const nickname = document.getElementById("nickname");
-    const following = document.getElementById("following");
-    const followers = document.getElementById("followers");
-
-    email.textContent = data.email;
-    nickname.textContent = data.nickname;
-    following.textContent = data.following_count;
-    followers.textContent = data.followers_count;
-
-    const styleContent = document.getElementById("styles");
-
-    data.styles.forEach((styleObj) => {
-        const userStyle = document.createElement("div");
-        userStyle.textContent = styleObj.name;
-        styleContent.appendChild(userStyle);
-    });
-}
-
 async function loadAuthorArticles() {
-    const articles = await getUserArticles(userId);
+    const articles = await getFeedArticles();
 
     const articleList = document.getElementById("article-list");
 
@@ -97,3 +49,5 @@ async function loadAuthorArticles() {
         articleList.appendChild(newCol);
     });
 }
+
+loadAuthorArticles();
